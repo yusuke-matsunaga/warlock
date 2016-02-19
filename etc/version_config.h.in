@@ -1,0 +1,14 @@
+﻿
+
+//////////////////////////////////////////////////////////////////////
+// バージョン変数の設定
+//////////////////////////////////////////////////////////////////////
+
+/// @brief プロジェクトの major バージョン
+#define WARLOCK_VERSION_MAJIR @WARLOCK_VERSION_MAJOR@
+
+/// @brief プロジェクトの minor バージョン
+#define WARLOCK_VERSION_MINOR @WARLOCK_VERSION_MINOR@
+
+/// @brief プロジェクトのバージョン
+#define WARLOCK_VERSION @WARLOCK_VERSION@
