@@ -1,0 +1,70 @@
+#ifndef IRNODE_H
+#define IRNODE_H
+
+/// @file IrNode.h
+/// @brief IrNode のヘッダファイル
+/// @author Yusuke Matsunaga (松永 裕介)
+///
+/// Copyright (C) 2016 Yusuke Matsunaga
+/// All rights reserved.
+
+
+#include "warlock.h"
+
+
+BEGIN_NAMESPACE_YM_WARLOCK
+
+//////////////////////////////////////////////////////////////////////
+/// @class IrNode IrNode.h "IrNode.h"
+/// @brief IR(intermediate Representation) Node を表すクラス
+///
+/// IR Node は大まかには機械語命令に対応する．
+//////////////////////////////////////////////////////////////////////
+class IrNode
+{
+public:
+
+  /// @brief デストラクタ
+  virtual
+  ~IrNode() { }
+
+
+public:
+  //////////////////////////////////////////////////////////////////////
+  // 外部インターフェイス
+  //////////////////////////////////////////////////////////////////////
+
+  /// @brief 型を返す．
+  virtual
+  IrType
+  type() const = 0;
+
+  /// @brief オペランド数を返す．
+  virtual
+  ymuint
+  operand_num() const = 0;
+
+  /// @brief オペランドを返す．
+  /// @param[in] pos 位置 ( 0 <= pos < operand_num() )
+  virtual
+  const IrOperand*
+  operand(ymuint pos) const = 0;
+
+
+private:
+  //////////////////////////////////////////////////////////////////////
+  // 内部で用いられる関数
+  //////////////////////////////////////////////////////////////////////
+
+
+private:
+  //////////////////////////////////////////////////////////////////////
+  // データメンバ
+  //////////////////////////////////////////////////////////////////////
+
+
+};
+
+END_NAMESPACE_YM_WARLOCK
+
+#endif // IRNODE_H
