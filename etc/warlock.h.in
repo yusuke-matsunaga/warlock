@@ -6,11 +6,31 @@
 ///
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
-/// Copyright (C) 2016 Yusuke Matsunaga
+/// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
 #include "ym_config.h"
-#include "version_config.h"
+
+
+
+//////////////////////////////////////////////////////////////////////
+// バージョン変数の設定
+//////////////////////////////////////////////////////////////////////
+
+/// @brief プロジェクトの major バージョン
+#define WARLOCK_VERSION_MAJIR @PROJECT_VERSION_MAJOR@
+
+/// @brief プロジェクトの minor バージョン
+#define WARLOCK_VERSION_MINOR @PROJECT_VERSION_MINOR@
+
+/// @brief プロジェクトのバージョン
+#define WARLOCK_VERSION @PROJECT_VERSION@
+
+/// @brief プロジェクトのバージョンの文字列
+#define WARLOCK_VERSION_STR "@PROJECT_VERSION@"
+
+/// @brief バージョン付きのプロジェクト名の文字列
+#define WARLOCK_PROJECT_STR "@YM_PROJECT_STRING@"
 
 
 // 名前空間の定義ファイル

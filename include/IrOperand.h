@@ -5,7 +5,7 @@
 /// @brief IrOperand のヘッダファイル
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
-/// Copyright (C) 2016 Yusuke Matsunaga
+/// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
 
@@ -49,7 +49,7 @@ public:
 
   /// @brief 変数型/配列型の時の変数IDを返す．
   virtual
-  ymuint
+  int
   var_id() const = 0;
 
   /// @brief 配列型の時のインデックスを返す．

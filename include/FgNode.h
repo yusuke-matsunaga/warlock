@@ -5,7 +5,7 @@
 /// @brief FgNode のヘッダファイル
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
-/// Copyright (C) 2016 Yusuke Matsunaga
+/// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
 
@@ -39,25 +39,25 @@ public:
 
   /// @brief 入力している枝の数を返す．
   virtual
-  ymuint
+  int
   input_num() const = 0;
 
   /// @brief 入力している枝を返す．
   /// @param[in] pos 位置番号 ( 0 <= pos < input_num() )
   virtual
   FgEdge*
-  input(ymuint pos) const = 0;
+  input(int pos) const = 0;
 
   /// @brief 出力している枝の数を返す．
   virtual
-  ymuint
+  int
   output_num() const = 0;
 
   /// @brief 出力している枝を返す．
   /// @param[in] pos 位置番号 ( 0 <= pos < output_num() )
   virtual
   FgEdge*
-  output(ymuint pos) const = 0;
+  output(int pos) const = 0;
 
 
 private:

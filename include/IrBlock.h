@@ -5,7 +5,7 @@
 /// @brief IrBlock のヘッダファイル
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
-/// Copyright (C) 2016 Yusuke Matsunaga
+/// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
 
@@ -37,13 +37,13 @@ public:
   //////////////////////////////////////////////////////////////////////
 
   /// @brief ノード数を得る．
-  ymuint
+  int
   node_num() const;
 
   /// @brief ノードを返す．
   /// @param[in] pos 位置 ( 0 <= pos < node_num() )
   const IrNode*
-  node(ymuint pos) const;
+  node(int pos) const;
 
   /// @brief 開始ノードを返す．
   ///
@@ -52,13 +52,13 @@ public:
   start_node() const;
 
   /// @brief 終了ノードの個数を返す．
-  ymuint
+  int
   end_node_num() const;
 
   /// @brief 終了ノードを返す．
   /// @param[in] pos 位置 ( 0 <= pos < end_node_num() )
   const IrNode*
-  end_node(ymuint pos) const;
+  end_node(int pos) const;
 
 
 private:
@@ -72,17 +72,11 @@ private:
   // データメンバ
   //////////////////////////////////////////////////////////////////////
 
-  // ノード数
-  ymuint mNodeNum;
-
   // ノードの配列
-  IrNode** mNodeList;
-
-  // 終了ノード数
-  ymuint mEndNodeNum;
+  vector<IrNode*> mNodeList;
 
   // 終了ノードの配列
-  IrNode** mEndNodeList;
+  vector<IrNode*> mEndNodeList;
 
 };
 

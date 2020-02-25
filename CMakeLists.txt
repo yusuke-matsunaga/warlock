@@ -1,23 +1,28 @@
 # ===================================================================
 # CMAKE のおまじない
 # ===================================================================
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required (VERSION 3.10)
 
 
-# C++11 の指定
-set (CMAKE_CXX_STANDARD 11)
+# C++14 の指定
+set (CMAKE_CXX_STANDARD 14)
 
 
 # ===================================================================
 # プロジェクト名，バージョンの設定
 # ===================================================================
-project (warlock)
-set (WARLOCK_VERSION_MAJOR 1)
-set (WARLOCK_VERSION_MINOR 0)
-set (WARLOCK_VERSION ${WARLOCK_VERSION_MAJOR}.${WARLOCK_VERSION_MINOR})
+set ( YM_VERSION_MAJOR 1 )
+set ( YM_VERSION_MINOR 0 )
+set ( YM_VERSION "${YM_VERSION_MAJOR}.${YM_VERSION_MINOR}" )
+project ( warlock VERSION ${YM_VERSION} )
 
-# ライブラリのインストールディレクトリ
-set ( YM_INSTALL_LIBDIR "lib/warlock" )
+set ( YM_PROJECT_STRING "${PROJECT_NAME}-${PROJECT_VERSION}" )
+
+# 名前空間
+set ( WARLOCK_NSNAME "nsWarlock" )
+
+# インストールディレクトリ
+set ( CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/stage" )
 
 
 # ===================================================================
@@ -32,33 +37,21 @@ list ( APPEND CMAKE_MODULE_PATH
   "${PROJECT_SOURCE_DIR}/ym-common/cmake"
   )
 
-include (FindDoxygen)
+include ( YmUtils )
 
-# Python のバージョン指定
-set( Python_ADDITIONAL_VERSIONS 3.6 3.5 3.4 3.3 3.2 3.1 )
-include( FindPythonInterp )
-include( FindPythonLibs )
-
-include( UseCython )
-
-find_package(Gperftools)
-
-include (ym_add_library)
+ym_init ( "" )
+ym_init_python ()
+ym_init_cython ()
+ym_init_lua ()
+ym_init_doxygen ()
+ym_init_gperftools ()
+ym_init_ctest ()
 
 
 # ===================================================================
 # google-test は内蔵のものを使う．
 # ===================================================================
-include ( ym_use_gtest )
 ym_use_gtest ()
-
-
-# ===================================================================
-# CTest モジュールの読み込み
-# ===================================================================
-include (CTest)
-
-enable_testing()
 
 
 # ===================================================================
@@ -66,10 +59,19 @@ enable_testing()
 # ===================================================================
 
 configure_file(
-  "${PROJECT_SOURCE_DIR}/etc/version_config.h.in"
-  "${PROJECT_BINARY_DIR}/version_config.h"
+  "${PROJECT_SOURCE_DIR}/etc/warlock.h.in"
+  "${PROJECT_BINARY_DIR}/warlock.h"
   )
 
+
+# ===================================================================
+# サブモジュールのリスト
+# ===================================================================
+
+ym_init_submodules (
+  ym-base
+  ym-common
+  )
 
 
 # ===================================================================
@@ -78,7 +80,8 @@ configure_file(
 include_directories (
   ${PROJECT_SOURCE_DIR}/include
   ${PROJECT_SOURCE_DIR}/ym-common/include
-  ${PROJECT_BINARY_DIR}
+  ${PROJECT_BINARY_DIR}/inclue
+  ${YM_SUBMODULE_INCLUDE_LIST}
   )
 
 
@@ -86,7 +89,9 @@ include_directories (
 # サブディレクトリの設定
 # ===================================================================
 
-add_subdirectory ( ym-common )
+foreach ( dir ${YM_SUBMODULE_LIST} )
+  add_subdirectory( ${dir} )
+endforeach ()
 
 
 # ===================================================================
@@ -98,9 +103,8 @@ add_subdirectory ( ym-common )
 # ===================================================================
 # ターゲットの設定
 # ===================================================================
-ym_add_library (warlock_common
-  SHARED
-  DESTINATION ${YM_INSTALL_LIBDIR}
+ym_add_object_library (warlock_common
+
   )
 
 
