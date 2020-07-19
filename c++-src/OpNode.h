@@ -1,32 +1,37 @@
-#ifndef FGEDGE_H
-#define FGEDGE_H
+#ifndef OPNODE_H
+#define OPNODE_H
 
-/// @file FgEdge.h
-/// @brief FgEdge のヘッダファイル
+/// @file OpNode.h
+/// @brief OpNode のヘッダファイル
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
 /// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
+#include "FgNode.h"
 
-#include "warlock.h"
 
-
-BEGIN_NAMESPACE_YM_WARLOCK
+BEGIN_NAMESPACE_WARLOCK
 
 //////////////////////////////////////////////////////////////////////
-/// @class FgEdge FgEdge.h "FgEdge.h"
-/// @brief フローグラフの枝を表すクラス
+/// @class OpNode OpNode.h "OpNode.h"
+/// @brief 演算ノード
 //////////////////////////////////////////////////////////////////////
-class FgEdge
+class OpNode :
+  public FgNode
 {
 public:
 
   /// @brief コンストラクタ
-  FgEdge();
+  /// @param[in] id ID番号
+  /// @param[in] fanin_list ファンインノードのリスト
+  /// @param[in] op_type 演算タイプ
+  OpNode(int id,
+	 const vector<FgNode*>& fanin_list,
+	 const OpType& op_type);
 
   /// @brief デストラクタ
-  ~FgEdge();
+  ~OpNode();
 
 
 public:
@@ -34,13 +39,9 @@ public:
   // 外部インターフェイス
   //////////////////////////////////////////////////////////////////////
 
-  /// @brief 出力先のノードを得る．
-  FgNode*
-  to() const;
-
-  /// @brief 入力元のノードを得る．
-  FgNode*
-  from() const;
+  /// @brief 演算タイプを返す．
+  const OpType&
+  op_type() const;
 
 
 private:
@@ -54,14 +55,24 @@ private:
   // データメンバ
   //////////////////////////////////////////////////////////////////////
 
-  // 入力元のノード
-  FgNode* mFrom;
-
-  // 出力先のノード
-  FgNode* mTo;
+  // 演算タイプ
+  const OpType& mOpType;
 
 };
 
-END_NAMESPACE_YM_WARLOCK
 
-#endif // FGEDGE_H
+//////////////////////////////////////////////////////////////////////
+// インライン関数の定義
+//////////////////////////////////////////////////////////////////////
+
+// @brief 演算タイプを返す．
+inline
+const OpType&
+OpNode::op_type() const
+{
+  return mOpType;
+}
+
+END_NAMESPACE_WARLOCK
+
+#endif // OPNODE_H

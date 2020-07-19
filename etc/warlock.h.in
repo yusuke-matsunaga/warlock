@@ -41,44 +41,43 @@
 // namespace でネストするのがいやなので define マクロでごまかす．
 //////////////////////////////////////////////////////////////////////
 
-#define BEGIN_NAMESPACE_YM_WARLOCK \
+#define BEGIN_NAMESPACE_WARLOCK \
 BEGIN_NAMESPACE_YM \
 BEGIN_NAMESPACE(nsWarlock)
 
-#define END_NAMESPACE_YM_WARLOCK \
+#define END_NAMESPACE_WARLOCK \
 END_NAMESPACE(nsWarlock) \
 END_NAMESPACE_YM
 
 
-BEGIN_NAMESPACE_YM_WARLOCK
-
+BEGIN_NAMESPACE_WARLOCK
 
 //////////////////////////////////////////////////////////////////////
 // FgNode の種類を表す列挙型
 //////////////////////////////////////////////////////////////////////
-enum NodeType {
-  kNode_START,
-  kNode_END,
-  kNODE_BRANCH,
-  kNODE_JOIN,
-  kNODE_CALL,
+enum class NodeType {
+  START,
+  END,
+  BRANCH,
+  JOIN,
+  CALL,
 
-  kNODE_NOT,
-  kNODE_AND,
-  kNODE_OR,
-  kNODE_XOR,
+  NOT,
+  AND,
+  OR,
+  XOR,
 
-  kNODE_ADD,
-  kNODE_SUB,
-  kNODE_MUL,
-  kNODE_DIV,
-  kNODE_MOD,
+  ADD,
+  SUB,
+  MUL,
+  DIV,
+  MOD,
 
-  kNODE_BITSELECT,
-  kNODE_PARTSELECT,
+  BITSELECT,
+  PARTSELECT,
 
-  kNODE_LOAD,
-  kNODE_STORE,
+  LOAD,
+  STORE,
 };
 
 
@@ -90,6 +89,6 @@ class FgEdge;
 class FgNode;
 class FgGraph;
 
-END_NAMESPACE_YM_WARLOCK
+END_NAMESPACE_WARLOCK
 
 #endif // WARLOCK_H

@@ -12,7 +12,7 @@
 #include "warlock.h"
 
 
-BEGIN_NAMESPACE_YM_WARLOCK
+BEGIN_NAMESPACE_WARLOCK
 
 //////////////////////////////////////////////////////////////////////
 /// @class IrOperand IrOperand.h "IrOperand.h"
@@ -70,6 +70,6 @@ private:
 
 };
 
-END_NAMESPACE_YM_WARLOCK
+END_NAMESPACE_WARLOCK
 
 #endif // IROPERAND_H

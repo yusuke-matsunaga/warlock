@@ -12,7 +12,7 @@
 #include "warlock.h"
 
 
-BEGIN_NAMESPACE_YM_WARLOCK
+BEGIN_NAMESPACE_WARLOCK
 
 //////////////////////////////////////////////////////////////////////
 /// @class IrBlock IrBlock.h "IrBlock.h"
@@ -80,6 +80,6 @@ private:
 
 };
 
-END_NAMESPACE_YM_WARLOCK
+END_NAMESPACE_WARLOCK
 
 #endif // IRBLOCK_H

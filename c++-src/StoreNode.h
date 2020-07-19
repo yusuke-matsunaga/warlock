@@ -1,32 +1,41 @@
-#ifndef IRNODE_H
-#define IRNODE_H
+#ifndef STORENODE_H
+#define STORENODE_H
 
-/// @file IrNode.h
-/// @brief IrNode のヘッダファイル
+/// @file StoreNode.h
+/// @brief StoreNode のヘッダファイル
 /// @author Yusuke Matsunaga (松永 裕介)
 ///
-/// Copyright (C) 2016, 2020 Yusuke Matsunaga
+/// Copyright (C) 2020 Yusuke Matsunaga
 /// All rights reserved.
 
-
-#include "warlock.h"
+#include "MemNode.h"
 
 
 BEGIN_NAMESPACE_WARLOCK
 
 //////////////////////////////////////////////////////////////////////
-/// @class IrNode IrNode.h "IrNode.h"
-/// @brief IR(intermediate Representation) Node を表すクラス
-///
-/// IR Node は大まかには機械語命令に対応する．
+/// @class StoreNode StoreNode.h "StoreNode.h"
+/// @brief メモリにストアする処理を表すノード
 //////////////////////////////////////////////////////////////////////
-class IrNode
+class StoreNode :
+  public MemNode
 {
 public:
 
+  /// @brief コンストラクタ
+  /// @param[in] id ID番号
+  /// @param[in] addr アドレス
+  /// @param[in] block_id ブロック番号
+  /// @param[in] bank_id バンク番号
+  /// @param[in] offset オフセット
+  StoreNode(int id,
+	    int addr,
+	    int block_id,
+	    int bank_id,
+	    int offset);
+
   /// @brief デストラクタ
-  virtual
-  ~IrNode() { }
+  ~StoreNode();
 
 
 public:
@@ -34,21 +43,13 @@ public:
   // 外部インターフェイス
   //////////////////////////////////////////////////////////////////////
 
-  /// @brief 型を返す．
-  virtual
-  IrType
-  type() const = 0;
+  /// @brief ノードの種類を返す．
+  NodeType
+  type() const override;
 
-  /// @brief オペランド数を返す．
-  virtual
-  int
-  operand_num() const = 0;
-
-  /// @brief オペランドを返す．
-  /// @param[in] pos 位置 ( 0 <= pos < operand_num() )
-  virtual
-  const IrOperand*
-  operand(int pos) const = 0;
+  /// @brief 名前を返す．
+  string
+  name() const override;
 
 
 private:
@@ -67,4 +68,4 @@ private:
 
 END_NAMESPACE_WARLOCK
 
-#endif // IRNODE_H
+#endif // STORENODE_H
